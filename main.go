@@ -1,13 +1,12 @@
 package main
 
 import (
-	"log"
-
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/gofiber/fiber/v2/middleware/logger"
 	"github.com/wpcodevo/golang-fiber/controllers"
 	"github.com/wpcodevo/golang-fiber/initializers"
+	"log"
 )
 
 func init() {
@@ -21,7 +20,6 @@ func init() {
 func main() {
 	app := fiber.New()
 	micro := fiber.New()
-
 	app.Mount("/api", micro)
 	app.Use(logger.New())
 	app.Use(cors.New(cors.Config{
@@ -30,7 +28,6 @@ func main() {
 		AllowMethods:     "GET, POST, PATCH, DELETE",
 		AllowCredentials: true,
 	}))
-
 	micro.Route("/notes", func(router fiber.Router) {
 		router.Post("/", controllers.CreateNoteHandler)
 		router.Get("", controllers.FindNotes)
@@ -46,6 +43,5 @@ func main() {
 			"message": "Welcome to Golang, Fiber, and GORM",
 		})
 	})
-
 	log.Fatal(app.Listen(":8000"))
 }

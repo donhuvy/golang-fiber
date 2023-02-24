@@ -1,10 +1,9 @@
 package models
 
 import (
-	"time"
-
 	"github.com/go-playground/validator/v10"
 	"github.com/google/uuid"
+	"time"
 )
 
 type Note struct {
